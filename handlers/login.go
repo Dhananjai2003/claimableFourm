@@ -17,8 +17,7 @@ func Login(c *gin.Context) {
 	}
 
 	var user models.User
-	err := db.DB.QueryRow(`SELECT id, password_hash FROM users WHERE username=$1`, input.Username).
-		Scan(&user.ID, &user.Password)
+	err := db.DB.QueryRow(`SELECT id, password_hash FROM users WHERE username=$1`, input.Username).Scan(&user.ID, &user.Password)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return

@@ -1,4 +1,4 @@
-module cliamable-fourm
+module claimable-forum
 
 go 1.20
 
