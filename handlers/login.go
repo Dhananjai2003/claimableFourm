@@ -24,7 +24,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	if !utils.CheckPassword(input.Password, user.Password) {
+	if input.Password_hash != user.Password_hash {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
 		return
 	}
