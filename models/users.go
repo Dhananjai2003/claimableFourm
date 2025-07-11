@@ -4,6 +4,6 @@ type User struct {
 
 	Id int
 	Username string
-	Password_hash strings
+	Password_hash string
 
 }
