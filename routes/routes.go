@@ -3,10 +3,18 @@ package routes
 import (
 	"claimable-forum/handlers"
 	"github.com/gin-gonic/gin"
+	"claimable-forum/utils"
 )
 
 func SetupRoutes(r *gin.Engine) {
 	r.POST("/signup", handlers.SignUp)
 	r.POST("/login", handlers.Login)
-	r.POST("/posts", handlers.CreatePost)
+
+	protected := r.Group("/")
+protected.Use(utils.JWTauthMiddleWare())
+	{
+		protected.POST("/posts", handlers.CreatePost)
+		
+	}
+
 }

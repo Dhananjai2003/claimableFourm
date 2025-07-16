@@ -12,6 +12,13 @@ func CreatePost(c *gin.Context) {
 
 	var req models.CreatePostRequest
 
+	userIDAny, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+		return
+	}
+	userID := userIDAny.(int)
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
@@ -22,7 +29,7 @@ func CreatePost(c *gin.Context) {
 		INSERT INTO posts (title, content, user_id, is_anonymous, created_at)
 		VALUES ($1, $2, $3, $4, $5)
 		RETURNING id
-	`, req.Title, req.Content, req.UserID, req.IsAnonymous, time.Now()).Scan(&postID)
+	`, req.Title, req.Content, userID, req.IsAnonymous, time.Now()).Scan(&postID)
 
 	if err != nil {
 		log.Println("Post insert error:", err)
