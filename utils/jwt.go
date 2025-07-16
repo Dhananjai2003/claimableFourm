@@ -3,9 +3,10 @@ package utils
 import (
 	"github.com/golang-jwt/jwt/v5"
 	"time"
+	"os"
 )
 
-var jwtKey = []byte("your_secret_key")
+var jwtKey = []byte(os.Getenv("JWT_KEY"))
 
 func GenerateJWT(userID int) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
