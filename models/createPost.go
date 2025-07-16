@@ -1,6 +1,6 @@
 package models
 
-type CreatePostRequest type {
+type CreatePostRequest struct {
 
 	Title string
 	Content string
