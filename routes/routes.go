@@ -14,6 +14,7 @@ func SetupRoutes(r *gin.Engine) {
 protected.Use(utils.JWTauthMiddleWare())
 	{
 		protected.POST("/posts", handlers.CreatePost)
+		protected.POST("/claim/:id",handlers.ClaimPost)
 		
 	}
 
