@@ -1,12 +1,10 @@
 package utils
 
 import (
-	"claimable-forum/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
 )
-
 
 func JWTauthMiddleWare() gin.HandlerFunc{
 
@@ -18,7 +16,7 @@ return func(c *gin.Context) {
 		}
 
 		tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
-		claims, err := utils.ParseJWT(tokenStr)
+		claims, err := ParseJWT(tokenStr)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
 			return

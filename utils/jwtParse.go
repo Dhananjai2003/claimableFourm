@@ -1,10 +1,12 @@
 package utils
 
 import (
+	"errors"
 	"github.com/golang-jwt/jwt/v5"
-	"time"
 	"os"
 )
+
+var secretKey = []byte(os.Getenv("JWT_KEY"))
 
 func ParseJWT(tokenStr string) (jwt.MapClaims, error) {
 	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
@@ -21,5 +23,5 @@ func ParseJWT(tokenStr string) (jwt.MapClaims, error) {
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		return claims, nil
 	}
-	return nil, jwt.ErrTokenInvalid
+	return nil, errors.New("invalid token")
 }
