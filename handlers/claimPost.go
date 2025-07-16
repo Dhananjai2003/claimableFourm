@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"claimable-forum/db"
 	"net/http"
-	"log"
 )
 
 func ClaimPost(c *gin.Context) {
@@ -29,7 +28,7 @@ func ClaimPost(c *gin.Context) {
 		return
 	}
 
-	_, err = db.DB.Exec(`UPDATE posts SET is_anonymous = true WHERE id = $1`,postID)
+	_, err = db.DB.Exec(`UPDATE posts SET is_anonymous = false WHERE id = $1`,postID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Could not claim post"})
 		return

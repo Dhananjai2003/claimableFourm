@@ -15,7 +15,7 @@ protected.Use(utils.JWTauthMiddleWare())
 	{
 		protected.POST("/posts", handlers.CreatePost)
 		protected.POST("/claim/:id",handlers.ClaimPost)
-		
+		protected.POST("/comment",handlers.CreateComment)
 	}
 
 }
