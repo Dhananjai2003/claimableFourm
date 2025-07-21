@@ -7,3 +7,4 @@ type CreatePostRequest struct {
 	MediaURLs   []string 
 	FileTypes   []string 
 }
+
