@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	"log"
 	"github.com/gin-gonic/gin"
 	"claimable-forum/db"
 )
@@ -38,7 +37,6 @@ func ReactComment(c *gin.Context) {
 	`, userID, commentID, reaction, time.Now())
 
 	if err != nil {
-		log.Println(err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save reaction"})
 		return
 	}

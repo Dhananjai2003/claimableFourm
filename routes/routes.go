@@ -12,8 +12,10 @@ func SetupRoutes(r *gin.Engine) {
 
 	protected := r.Group("/")
 protected.Use(utils.JWTauthMiddleWare())
-	{
+	{	
+		//Post handlers
 		protected.POST("/posts", handlers.CreatePost)
+		protected.POST("/reactPost/:id/react/:reaction",handlers.ReactPost)
 		protected.POST("/claim/:id",handlers.ClaimPost)
 
 		//Comment handlers
